@@ -2,9 +2,7 @@
   "values": [
     "Afro",
     "Bald",
-    "Buzz cut",
-    "Cornrows",
-    "Crew cut",
+    "Buzzcut",
     "Curly",
     "Dreadlocks",
     "Layered",
@@ -13,10 +11,8 @@
     "Mohawk",
     "Pompadour",
     "Ponytail",
-    "Pixie",
     "Short",
     "Straight",
-    "Top knot",
     "Wavy"
   ]
 }
