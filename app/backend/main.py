@@ -1,6 +1,7 @@
-from flask import Flask, send_from_directory
-# from PIL import Image
-# import io
+from flask import Flask, Response, send_from_directory, request
+from PIL import Image
+import io
+from sdmigeapi import client
 
 app = Flask(__name__)
 
@@ -14,7 +15,6 @@ def index():
 def ping():
     print('ping')
     return 'Pong'
-
 
 # @app.route('/image')
 # def get_image():

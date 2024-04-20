@@ -10,6 +10,13 @@
 <main id="app">
     Hello world
     <button @click="test">Ping</button>
+    <button @click="image">GetImage</button>
+    <img id="image" src="" width="369px">
+    <textarea v-model="prompt">Prompt here</textarea>
+
+    <div class="spinner-border" role="status" id="loading" style="visibility:hidden">
+      <span class="visually-hidden">Loading...</span>
+    </div>
 
 </main>
 
