@@ -42,7 +42,7 @@
                 image.src = "";
                 spinner.style.visibility = "visible";
 
-                let response = await fetch(`http://127.0.0.1:5000/image?prompt=${this.prompt}`);
+                let response = await fetch(`http://127.0.0.1:5000/api/image?prompt=${this.prompt}`);
                 const blob = await response.blob();
                 const imageUrl = URL.createObjectURL(blob);
 
