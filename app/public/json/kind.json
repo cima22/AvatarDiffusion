@@ -1,0 +1,11 @@
+{
+  "kind": [
+    "Human", "Elf", "Dwarf", "Orc", "Goblin", "Troll", "Gnome", "Halfling", "Kobold",
+    "Centaur", "Minotaur", "Satyr", "Fairy", "Pixie", "Nymph", "Dryad", "Sprite", "Unicorn",
+    "Phoenix", "Dragon", "Griffin", "Hippogriff", "Basilisk", "Chimera", "Zombie", "Skeleton",
+    "Ghost", "Vampire", "Lich", "Wraith", "Mummy", "Ghoul", "Sphinx", "Cerberus", "Hydra",
+    "Pegasus", "Cyclops", "Harpy", "Kraken", "Gorgon", "Elemental", "Golem", "Djinn", "Salamander",
+    "Undine", "Sylph", "Werewolf", "Mermaid/Merman", "Sasquatch/Bigfoot", "Yeti/Abominable Snowman",
+    "Loch Ness Monster", "Jersey Devil", "Mothman", "Alien", "Robot", "Mutant"
+  ]
+}

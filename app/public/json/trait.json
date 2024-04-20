@@ -1,0 +1,12 @@
+{
+  "trait": [
+    "Introverted", "Extroverted", "Optimistic", "Pessimistic", "Confident", "Shy", "Brave",
+    "Cowardly", "Intelligent", "Simple-minded", "Emotional", "Stable", "Humorous", "Serious",
+    "Creative", "Logical", "Analytical", "Impulsive", "Patient", "Impatient", "Empathetic",
+    "Ambitious", "Loyal", "Independent", "Cooperative", "Competitive", "Perfectionist",
+    "Flexible", "Resilient", "Adventurous", "Cautious", "Curious", "Skeptical", "Trusting",
+    "Generous", "Selfish", "Altruistic", "Narcissistic", "Open-minded", "Closed-minded",
+    "Forgiving", "Vengeful", "Honest", "Deceptive", "Diplomatic", "Confrontational",
+    "Empathic", "Rational", "Emotional", "Resourceful"
+  ]
+}
