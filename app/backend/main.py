@@ -1,5 +1,4 @@
 from flask import Flask, Response, send_from_directory, request
-from PIL import Image
 import io
 from sdmigeapi import client
 
