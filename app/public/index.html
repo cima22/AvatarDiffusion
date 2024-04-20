@@ -49,7 +49,7 @@
                 if (imageUrl) {
                     image.src = imageUrl;
                 } else {
-                    image.src = URL.createObjectURL(imageBlob);
+                    // TODO handle error
                 }
 
                 spinner.style.visibility = "hidden";
