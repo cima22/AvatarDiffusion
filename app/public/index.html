@@ -10,8 +10,6 @@
 <body>
 
 <main id="app">
-    Hello world
-    <button @click="test">Ping</button>
     <button @click="image">GetImage</button>
     <img id="image" src="" width="369px">
     <textarea v-model="prompt">Prompt here</textarea>
@@ -33,10 +31,6 @@
             }
         },
         methods: {
-            test: async function () {
-                let response = await fetch('http://127.0.0.1:5000/ping');
-                response.text().then(r => console.log(r));
-            },
             image: async function() {
                 const image = document.getElementById("image");
                 const spinner = document.getElementById("loading");
