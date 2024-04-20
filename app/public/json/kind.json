@@ -1,5 +1,5 @@
 {
-  "kind": [
+  "values": [
     "Human", "Elf", "Dwarf", "Orc", "Goblin", "Troll", "Gnome", "Halfling", "Kobold",
     "Centaur", "Minotaur", "Satyr", "Fairy", "Pixie", "Nymph", "Dryad", "Sprite", "Unicorn",
     "Phoenix", "Dragon", "Griffin", "Hippogriff", "Basilisk", "Chimera", "Zombie", "Skeleton",
