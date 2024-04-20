@@ -40,18 +40,5 @@ def files(filename):
     return send_from_directory('../public/json', filename)
 
 
-def read_json_from_file(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-        return data
-
-
-def fill_prompt(prompt):
-    positive_file_path = '../public/json/positive.json'
-    negative_file_path = '../public/json/negative.json'
-    positive_data = read_json_from_file(positive_file_path)
-    negative_data = read_json_from_file(negative_file_path)
-
-
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
