@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Avatar Diffusion</title>
@@ -7,17 +8,109 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
 
-<main id="app">
-    <button @click="image">GetImage</button>
-    <img id="image" src="" width="369px">
-    <textarea v-model="prompt">Prompt here</textarea>
+<body data-bs-theme="dark">
 
-    <div class="spinner-border" role="status" id="loading" style="visibility:hidden">
-      <span class="visually-hidden">Loading...</span>
+<main class="container-fluid" id="app">
+
+    <div class="row mx-5 my-5">
+        <div class="col-6">
+
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <select v-model="selectedAge" class="form-select" id="floatingSelectAge">
+                        <option value=""></option>
+                        <option v-for="a in age" :value="a">{{ a }}</option>
+                    </select>
+                  <label for="floatingSelectAge">Age</label>
+                </div>
+                <div class="col form-floating">
+                    <select v-model="selectedBodyType" class="form-select" id="floatingSelectDisabledBodyType">
+                        <option value=""></option>
+                        <option v-for="a in bodyType" :value="a">{{ a }}</option>
+                    </select>
+                  <label for="floatingSelectDisabledBodyType">Body type</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <select v-model="selectedHairStyle" class="form-select" id="floatingSelectDisabledHairStyle">
+                        <option value=""></option>
+                        <option v-for="a in hairStyle" :value="a">{{ a }}</option>
+                    </select>
+                  <label for="floatingSelectDisabledHairStyle">Hair style</label>
+                </div>
+                <div class="col form-floating">
+                    <select v-model="selectedHairColor" class="form-select" id="floatingSelectHairColor">
+                        <option value=""></option>
+                        <option v-for="a in color" :value="a">{{ a }}</option>
+                    </select>
+                    <label for="floatingSelectHairColor">Hair color</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <select v-model="selectedCelebrity" class="form-select" id="floatingSelectDisabledCelebrity">
+                        <option value=""></option>
+                        <option v-for="a in celebrity" :value="a">{{ a }}</option>
+                    </select>
+                  <label for="floatingSelectDisabledCelebrity">Celebrity</label>
+                </div>
+                <div class="col form-floating">
+                    <select v-model="selectedKind" class="form-select" id="floatingSelectDisabledKind">
+                        <option value=""></option>
+                        <option v-for="a in kind" :value="a">{{ a }}</option>
+                    </select>
+                  <label for="floatingSelectDisabledKind">Kind</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                 <div class="col form-floating">
+                    <select v-model="selectedGender" class="form-select" id="floatingSelectGender">
+                        <option value=""></option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                     <label for="floatingSelectGender">Gender</label>
+                </div>
+                <div class="col form-floating">
+                    <select v-model="selectedType" class="form-select" id="floatingSelectDisabledType">
+                        <option value=""></option>
+                        <option v-for="a in type" :value="a">{{ a }}</option>
+                    </select>
+                    <label for="floatingSelectDisabledType">Type</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                 <div class="col form-floating">
+                     <input v-model="selectedNegative" type="text" class="form-control" id="floatingSelectNegative">
+                     <label for="floatingSelectNegative">Negative</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <button class="btn btn-outline-light" @click="image">Render</button>
+                </div>
+                <div class="col form-floating">
+                    <button class="btn btn-outline-light" @click="saveImage">Save image</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col d-flex align-items-center justify-content-center">
+            <div class="spinner-border" role="status" id="loading" style="visibility:hidden">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <img id="outputImage" src="" width="369px">
+        </div>
+
     </div>
-
 </main>
 
 <script type="module">
@@ -27,18 +120,61 @@
     const app = createApp({
         data: function() {
             return {
-                prompt: ""
+                age: [],
+                selectedAge: "",
+                bodyType: [],
+                selectedBodyType: "",
+                celebrity: [],
+                selectedCelebrity: "",
+                hairStyle: [],
+                selectedHairStyle: "",
+                kind: [],
+                selectedKind: "",
+                selectedNegative: "",
+                selectedPositive: "",
+                type: [],
+                selectedType: "",
+                color: [],
+                selectedHairColor: "",
+                selectedGender: ""
             }
         },
         methods: {
             image: async function() {
-                const image = document.getElementById("image");
+                const image = document.getElementById("outputImage");
                 const spinner = document.getElementById("loading");
 
                 image.src = "";
+                image.style.visibility = "hidden";
                 spinner.style.visibility = "visible";
 
-                let response = await fetch(`${host}/api/image?prompt=${this.prompt}`);
+                let prompt_str = ""
+                if (this.selectedAge.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedAge, ",")
+                }
+                if (this.selectedBodyType.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedBodyType, ",")
+                }
+                if (this.selectedCelebrity.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedCelebrity, ",")
+                }
+                if (this.selectedHairStyle.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedHairStyle, "hair,")
+                }
+                if (this.selectedKind.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedKind, ",")
+                }
+                if (this.selectedType.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedType, ",")
+                }
+                if (this.selectedHairColor.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedHairColor, ",")
+                }
+                if (this.selectedGender.length > 0) {
+                    prompt_str = prompt_str.concat(this.selectedGender, ",")
+                }
+
+                let response = await fetch(`${host}/api/image?prompt=${prompt_str}&negative=${this.selectedNegative}`);
                 if (response.status === 503) {
                     response.text().then(r => console.log(r));
                     return;
@@ -54,9 +190,46 @@
                 }
 
                 spinner.style.visibility = "hidden";
+                image.style.visibility = "visible";
+            },
+            saveImage: function() {
+                let imageElement = document.getElementById('outputImage');
+                let canvas = document.createElement('canvas');
+                canvas.width = imageElement.width;
+                canvas.height = imageElement.height;
+                let ctx = canvas.getContext('2d');
+                ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+                let dataURL = canvas.toDataURL('image/png');
+                let link = document.createElement('a');
+                link.download = 'image.png';
+                link.href = dataURL;
+                link.click();
             }
+        },
+        mounted: async function(){
+            let resp = await fetch(`${host}/api/age.json`);
+            resp.json().then(j => this.age = j["values"]);
+
+            resp = await fetch(`${host}/api/body_type.json`);
+            resp.json().then(j => this.bodyType = j["values"]);
+
+            resp = await fetch(`${host}/api/celebrity.json`);
+            resp.json().then(j => this.celebrity = j["values"]);
+
+            resp = await fetch(`${host}/api/hair_style.json`);
+            resp.json().then(j => this.hairStyle = j["values"]);
+
+            resp = await fetch(`${host}/api/kind.json`);
+            resp.json().then(j => this.kind = j["values"]);
+
+            resp = await fetch(`${host}/api/type.json`);
+            resp.json().then(j => this.type = j["values"]);
+
+            resp = await fetch(`${host}/api/colors.json`);
+            resp.json().then(j => this.color = j["values"]);
         }
     });
+
     app.mount("#app");
 </script>
 

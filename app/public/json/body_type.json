@@ -1,7 +1,20 @@
 {
   "values": [
-    "Slim", "Average", "Muscular", "Curvy", "Petite", "Tall", "Stocky", "Athletic",
-    "Chubby", "Thin", "Full-Figured", "Lean", "Fit", "Hourglass", "Pear-Shaped",
-    "Apple-Shaped", "Rectangle-Shaped"
+    "Athletic",
+    "Average",
+    "Chubby",
+    "Curvy",
+    "Fit",
+    "Full-Figured",
+    "Hourglass",
+    "Lean",
+    "Muscular",
+    "Pear-Shaped",
+    "Petite",
+    "Rectangle-Shaped",
+    "Slim",
+    "Stocky",
+    "Tall",
+    "Thin"
   ]
 }

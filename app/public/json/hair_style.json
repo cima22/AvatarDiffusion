@@ -1,7 +1,22 @@
 {
   "values": [
-    "Short", "Medium", "Long", "Bald", "Buzz cut", "Crew cut", "Pompadour", "Mohawk",
-    "Bob", "Pixie", "Layered", "Wavy", "Curly", "Straight", "Afro", "Cornrows",
-    "Dreadlocks", "Ponytail", "Top knot", "Braided"
+    "Afro",
+    "Bald",
+    "Buzz cut",
+    "Cornrows",
+    "Crew cut",
+    "Curly",
+    "Dreadlocks",
+    "Layered",
+    "Long",
+    "Medium",
+    "Mohawk",
+    "Pompadour",
+    "Ponytail",
+    "Pixie",
+    "Short",
+    "Straight",
+    "Top knot",
+    "Wavy"
   ]
 }

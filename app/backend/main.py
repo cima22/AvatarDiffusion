@@ -1,6 +1,8 @@
+from PIL import Image
 from flask import Flask, Response, send_from_directory, request
 import io
 from sdmigeapi import client
+import json
 
 app = Flask(__name__)
 
@@ -12,9 +14,15 @@ def index():
 
 @app.route('/api/image')
 def image():
-    prompt = request.args.get('prompt')
+    # pil_image = Image.open('../public/puppy.jpg')
+
+    prompt = request.args.get('prompt').lower()
+    prompt = prompt[:-1]
+    negative = request.args.get('negative').lower()
+    print(prompt)
+    print(negative)
     try:
-        images = client.generate_images(prompt, n_imgs=1)
+        images = client.generate_images(prompt, negative=negative, n_imgs=1)
     except TimeoutError:
         return Response('Stable Diffusion model timed out',
                         status=503,
@@ -30,6 +38,19 @@ def image():
 @app.route('/api/<string:filename>')
 def files(filename):
     return send_from_directory('../public/json', filename)
+
+
+def read_json_from_file(file_path):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+        return data
+
+
+def fill_prompt(prompt):
+    positive_file_path = '../public/json/positive.json'
+    negative_file_path = '../public/json/negative.json'
+    positive_data = read_json_from_file(positive_file_path)
+    negative_data = read_json_from_file(negative_file_path)
 
 
 if __name__ == '__main__':
