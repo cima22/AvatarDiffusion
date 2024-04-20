@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avatar Diffusion</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<main id="app">
+    Hello world
+    <button @click="test">Ping</button>
+
+</main>
+
+<script type="module">
+    const { createApp } = Vue;
+    const app = createApp({
+        methods: {
+            test: async function () {
+                let response = await fetch('http://127.0.0.1:5000/ping')
+                response.text().then(r => console.log(r))
+                // console.log(response.text())
+            }
+        }
+    });
+    app.mount("#app");
+</script>
+
+</body>
+</html>
