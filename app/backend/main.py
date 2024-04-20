@@ -16,22 +16,18 @@ def ping():
     print('ping')
     return 'Pong'
 
-# @app.route('/image')
-# def get_image():
-#     # Create a PIL image object (you might have this already)
-#     pil_image = Image.open(
-#         'path_to_your_image.jpg')  # Replace 'path_to_your_image.jpg' with the actual path to your image
-#
-#     # Convert PIL image to bytes
-#     img_byte_array = io.BytesIO()
-#     pil_image.save(img_byte_array, format='JPEG')
-#     img_byte_array = img_byte_array.getvalue()
-#
-#     # Set the appropriate content type
-#     headers = {'Content-Type': 'image/jpeg'}
-#
-#     # Return the image bytes as a response
-#     return Response(img_byte_array, headers=headers)
+
+@app.route('/image')
+def image():
+    prompt = request.args.get('prompt')
+    print(prompt)
+    images = client.generate_images(prompt, n_imgs=1)
+    pil_image = images[0]
+    img_byte_array = io.BytesIO()
+    pil_image.save(img_byte_array, format='JPEG')
+    img_byte_array = img_byte_array.getvalue()
+    headers = {'Content-Type': 'image/jpeg'}
+    return Response(img_byte_array, headers=headers)
 
 
 if __name__ == '__main__':
