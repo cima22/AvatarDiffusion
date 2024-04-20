@@ -13,19 +13,12 @@ def index():
 @app.route('/api/image')
 def image():
     prompt = request.args.get('prompt')
-    print(prompt)
-
-    return Response('Stable Diffusion model timed out',
-                    status=503,
-                    headers={'Content-Type': 'text/plain'})
-
     try:
         images = client.generate_images(prompt, n_imgs=1)
     except TimeoutError:
         return Response('Stable Diffusion model timed out',
                         status=503,
                         headers={'Content-Type': 'text/plain'})
-
     pil_image = images[0]
     img_byte_array = io.BytesIO()
     pil_image.save(img_byte_array, format='JPEG')
@@ -36,7 +29,7 @@ def image():
 
 @app.route('/api/<string:filename>')
 def files(filename):
-    return send_from_directory('../public', filename)
+    return send_from_directory('../public/json', filename)
 
 
 if __name__ == '__main__':
