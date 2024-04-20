@@ -10,13 +10,7 @@ def index():
     return send_from_directory('../public', 'index.html')
 
 
-@app.route('/ping')
-def ping():
-    print('ping')
-    return 'Pong'
-
-
-@app.route('/image')
+@app.route('/api/image')
 def image():
     prompt = request.args.get('prompt')
     print(prompt)
@@ -27,6 +21,11 @@ def image():
     img_byte_array = img_byte_array.getvalue()
     headers = {'Content-Type': 'image/jpeg'}
     return Response(img_byte_array, headers=headers)
+
+
+@app.route('/api/<string:filename>')
+def files(filename):
+    return send_from_directory('../public', filename)
 
 
 if __name__ == '__main__':
