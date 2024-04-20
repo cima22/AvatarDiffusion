@@ -14,7 +14,18 @@ def index():
 def image():
     prompt = request.args.get('prompt')
     print(prompt)
-    images = client.generate_images(prompt, n_imgs=1)
+
+    return Response('Stable Diffusion model timed out',
+                    status=503,
+                    headers={'Content-Type': 'text/plain'})
+
+    try:
+        images = client.generate_images(prompt, n_imgs=1)
+    except TimeoutError:
+        return Response('Stable Diffusion model timed out',
+                        status=503,
+                        headers={'Content-Type': 'text/plain'})
+
     pil_image = images[0]
     img_byte_array = io.BytesIO()
     pil_image.save(img_byte_array, format='JPEG')
